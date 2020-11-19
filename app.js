@@ -225,6 +225,7 @@ app.delete('/expense/delete', (req, res) => {
 	})
 })
 
-app.listen(3000, () => {
-	console.log('Server Started')
+app.listen(process.env.PORT || 80, function(){
+    console.log('server started')
 })
+
