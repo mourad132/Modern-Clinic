@@ -12,6 +12,6 @@
   "scripts": {
 	"start": "node app.js",
   },
-  "author": "",
+  "author": "Mourad Sherif",
   "license": "ISC"
 }
