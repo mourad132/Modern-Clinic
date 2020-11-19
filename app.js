@@ -138,12 +138,17 @@ app.delete('/case/delete', (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			delete found._id
-			CaseHistory.create(found, (err, history) => {
+			CaseHistory.create({
+				name: found.name,
+				paid: found.paid,
+				description: found.description,
+				assigned: found.assigned,
+				date: found.date,
+			}, (err, created) => {
 				if(err){
 					console.log(err)
 				} else {
-					res.send(history)
+					res.send(created)
 				}
 			})
 		}
