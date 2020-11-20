@@ -37,7 +37,7 @@ app.get('/cases', (req, res) => {
 
 
 
-//@route /case/new/id 
+//@route /case/new
 //@desc Creates A New Case
 //@method POST
 
