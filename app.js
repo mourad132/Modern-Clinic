@@ -3,7 +3,7 @@ const app = require("express")();
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Mourad:Momo2005@modern-clinic.noa2u.mongodb.net/App?retryWrites=true&w=majority', { useUnifiedTopology: true, useNewUrlParser: true});
 const cors = require('cors');
-const bodyParser = requrie('body-parser');
+const bodyParser = require('body-parser');
 
 //LOCAL MODULES
 const Case = require('./models/case.js');
