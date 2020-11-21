@@ -43,11 +43,11 @@ app.get('/cases', (req, res) => {
 
 app.post('/case/new', (req, res) => {
 	Case.create({
-		name: req.query.name,
-		paid: req.query.paid,
-		assigned: req.query.assigned,
-		description: req.query.description,
-		date: req.query.date,
+		name: req.body.name,
+		paid: req.body.paid,
+		assigned: req.body.assigned,
+		description: req.body.description,
+		date: req.body.date,
 	}, (err, created) => {
 		if(err){
 			console.log(err)
@@ -119,9 +119,9 @@ app.post('/new//case', (req, res) => {
 //New Expense Route
 app.post('/new/expense', (req, res) => {
 	Expense.create({
-		name: req.query.name,
-		description: req.query.description,
-		price: req.query.price
+		name: req.body.name,
+		description: req.body.description,
+		price: req.body.price
 	}, (err, expenses) => {
 		if(err){
 			console.log(err)
@@ -134,7 +134,7 @@ app.post('/new/expense', (req, res) => {
 
 //Move To History Case Route
 app.delete('/case/delete', (req, res) => {
-	Case.findById(req.query.id, (err, found) => {
+	Case.findById(req.body.id, (err, found) => {
 		if(err){
 			console.log(err)
 		} else {
@@ -157,13 +157,13 @@ app.delete('/case/delete', (req, res) => {
 
 //Update Case Route
 app.put('/case/update', (req, res) => {
-	Case.findOneAndUpdate(req.query.id, {
-		name: req.query.name,
-		paid: req.query.paid,
-		assigned: req.query.assigned,
-		description: req.query.description,
-		date: req.query.date,
-		number: req.query.number,
+	Case.findOneAndUpdate(req.body.id, {
+		name: req.body.name,
+		paid: req.body.paid,
+		assigned: req.body.assigned,
+		description: req.body.description,
+		date: req.body.date,
+		number: req.body.number,
 	}, (err, newCase) => {
 		if(err){
 			console.log(err)
@@ -198,11 +198,11 @@ function UpdateIncome(paid) {
 
 //Update Expense Route
 app.put('/expense/update', (req, res) => {
-	var id = req.query.id
+	var id = req.body.id
 	Expense.findOneAndUpdate(id, {
-		name: req.query.name,
-		description: req.query.description,
-		price: req.query.price
+		name: req.body.name,
+		description: req.body.description,
+		price: req.body.price
 	}, (err, updated) => {
 		if(err){
 			console.log(err)
@@ -215,7 +215,7 @@ app.put('/expense/update', (req, res) => {
 
 //Delete Expense
 app.delete('/expense/delete', (req, res) => {
-	Expense.findOneAndDelete(req.query.id, (err, expense) => {
+	Expense.findOneAndDelete(req.body.id, (err, expense) => {
 		if(err){
 			console.log(err)
 		} else {
