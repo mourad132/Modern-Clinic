@@ -82,23 +82,18 @@ app.get('/expenses', (req, res) => {
 })
 
 //Total Expense Function
-function totalExpense(){
-	Expense.find({}, (err, total) => {
-		if(err){
-		console.log(err)
-		} else {
-			var expenses = total.forEach(expense => {
-				expense.price += expenses;
-				return expenses;
-			})
-			return expenses;
-		}
-	})
-}
 
 //Total Expenses Route
-app.get('/totalExpenses', (req, res) => {
-	res.send(totalExpense())
+app.get('/totalExpenses', async (req, res) => {
+	var total = 0;
+	await Expense.find({}, (err, expense) => {
+		if(err){
+			console.log(err)
+		} else {
+			total += expense.price 
+		}
+	})
+	res.send(total)
 })
 
 //New Case Route 
