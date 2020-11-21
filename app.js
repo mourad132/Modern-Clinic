@@ -146,6 +146,11 @@ app.delete('/case/delete', (req, res) => {
 				if(err){
 					console.log(err)
 				} else {
+					Case.findOneAndDelete(req.body.id, (err, deleted) => {
+						if(err){
+							console.log(err)
+						}
+					})
 					res.send(created)
 				}
 			})
