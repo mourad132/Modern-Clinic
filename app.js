@@ -3,6 +3,7 @@ const app = require("express")();
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Mourad:Momo2005@modern-clinic.noa2u.mongodb.net/App?retryWrites=true&w=majority', { useUnifiedTopology: true, useNewUrlParser: true});
 const cors = require('cors');
+const bodyParser = requrie('body-parser');
 
 //LOCAL MODULES
 const Case = require('./models/case.js');
@@ -13,6 +14,8 @@ const CaseHistory = require('./models/CaseHistory')
 
 //APP CONFIG
 app.use(cors());
+app.use(bodyParser.urlencoded({ extened: false }));
+app.use(bodyParser.json())
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
