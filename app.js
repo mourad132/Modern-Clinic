@@ -123,16 +123,18 @@ app.post('/new/expense', (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			updateProfit();
 			totalExpense.find({}, (err, total) => {
 				if(err){
 					console.log(err)
 				} else {
 					total.total += expenses.price
 					res.send(expenses)
-				})
+				}
+			}
+		)
 		}
-	})
+	}
+	)
 })
 
 //Move To History Case Route
