@@ -10,7 +10,8 @@ const Case = require('./models/case.js');
 const User = require('./models/user.js');
 const Income = require('./models/income.js');
 const Expense = require('./models/expense.js');
-const CaseHistory = require('./models/CaseHistory')
+const CaseHistory = require('./models/CaseHistory');
+const totalExpense = require('./models/totalExpense');
 
 //APP CONFIG
 app.use(cors());
@@ -84,20 +85,18 @@ app.get('/expenses', (req, res) => {
 //Total Expense Function
 
 //Total Expenses Route
-app.get('/totalExpenses', async (req, res) => {
-	var total = 0;
-	await Expense.find({}, (err, expense) => {
+app.get('/totalExpenses', (req, res) => {
+	totalExpense.find({}, (err, found) => {
 		if(err){
 			console.log(err)
 		} else {
-			total += expense.price 
+			res.send(found.total)
 		}
 	})
-	res.send(total)
 })
 
 //New Case Route 
-app.post('/new//case', (req, res) => {
+app.post('/new/case', (req, res) => {
 	Case.create({
 		name: req.body.name,
 		paid: req.body.paid,
@@ -125,7 +124,13 @@ app.post('/new/expense', (req, res) => {
 			console.log(err)
 		} else {
 			updateProfit();
-			res.send(expenses)
+			totalExpense.find({}, (err, total) => {
+				if(err){
+					console.log(err)
+				} else {
+					total.total += expenses.price
+					res.send(expenses)
+				})
 		}
 	})
 })
