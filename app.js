@@ -128,6 +128,7 @@ app.post('/new/expense', (req, res) => {
 					console.log(err)
 				} else {
 					total.total += expenses.price
+					total.save()
 					res.send(expenses)
 				}
 			}
@@ -139,27 +140,32 @@ app.post('/new/expense', (req, res) => {
 
 //Move To History Case Route
 app.delete('/case/delete', (req, res) => {
-	Case.findById(req.body.id, (err, found) => {
+	Case.find({done: true}, (err, found) => {
 		if(err){
 			console.log(err)
 		} else {
-			CaseHistory.create({
-				name: found.name,
-				paid: found.paid,
-				description: found.description,
-				assigned: found.assigned,
-				date: found.date,
-			}, (err, created) => {
-				if(err){
-					console.log(err)
-				} else {
-					Case.findOneAndDelete(req.body.id, (err, deleted) => {
-						if(err){
-							console.log(err)
-						}
-					})
-					res.send(created)
-				}
+			found.forEach(done => {
+				CaseHistory.create({
+					name: done.name,
+					paid: done.paid,
+					description: done.description,
+					date: done.date,
+					assigned: done.assigned
+				}, (err, created) => {
+					if(err){
+						console.log(err)
+					} else {
+						found.forEach(one => {
+							Case.findOneAndDelete({_id: one._id}, (err, deleted) => {
+								if(err){
+									console.log(err)
+								} else {
+									res.send(created)
+								}
+							})
+						})
+					}
+				})
 			})
 		}
 	})
