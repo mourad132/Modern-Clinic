@@ -123,16 +123,11 @@ app.post('/new/expense', (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			totalExpense.find({}, (err, total) => {
+			totalExpense.findOneAndUpdate({_id: ''}, {total: expenses.total}, (err, total) => {
 				if(err){
 					console.log(err)
-				} else {
-					total.total += expenses.price
-					total.save()
-					res.send(expenses)
 				}
-			}
-		)
+			})
 		}
 	}
 	)
