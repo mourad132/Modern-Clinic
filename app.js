@@ -72,7 +72,7 @@ app.post('/case/new', (req, res) => {
 
 //Income & Profit Route
 app.get("/income", (req, res) => {
-	Income.findOne({}, (err, incomes) => {
+	Income.findOne({}, (err, income) => {
 		if(err){
 			console.log(err);
 		} else {
@@ -80,7 +80,7 @@ app.get("/income", (req, res) => {
 				if(err){
 					console.log(err)
 				} else {
-					res.send(incomes, total);					
+					res.send({income: incomes, total: total});					
 				}
 			})
 		}
