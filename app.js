@@ -80,12 +80,7 @@ app.get("/income", (req, res) => {
 				if(err){
 					console.log(err)
 				} else {
-					var diff = incomes.income - total.total
-					var profit = {
-						income: incomes,
-						profit: diff
-					}
-					res.send(profit);					
+					res.send(incomes, total);					
 				}
 			})
 		}
