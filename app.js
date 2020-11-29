@@ -80,7 +80,7 @@ app.get("/income", (req, res) => {
 				if(err){
 					console.log(err)
 				} else {
-					res.send({income: incomes, total: total});					
+					res.send({income: income, total: total});					
 				}
 			})
 		}
