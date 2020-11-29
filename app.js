@@ -90,7 +90,7 @@ app.get('/totalExpenses', (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			console.log(found)
+			res.send(found)
 		}
 	})
 })
