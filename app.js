@@ -56,6 +56,15 @@ app.post('/case/new', (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
+			Income.findOne({}, (err, income) => {
+				if(err){
+					console.log(err)
+				} else {
+					income.income += created.paid
+					income.save()
+					res.send(income)
+				}
+			})
 			res.send(created)
 		}
 	})
