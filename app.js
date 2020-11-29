@@ -72,11 +72,22 @@ app.post('/case/new', (req, res) => {
 
 //Income & Profit Route
 app.get("/income", (req, res) => {
-	Income.find({}, (err, incomes) => {
+	Income.findOne({}, (err, incomes) => {
 		if(err){
 			console.log(err);
 		} else {
-			res.send(JSON.stringify(incomes));
+			totalExpense.findOne({}, (err, total) => {
+				if(err){
+					console.log(err)
+				} else {
+					var diff = incomes.income - total.total
+					var profit = {
+						income: incomes,
+						profit: diff
+					}
+					res.send(profit);					
+				}
+			})
 		}
 	})
 });
