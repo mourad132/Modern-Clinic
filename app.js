@@ -107,8 +107,15 @@ app.post('/new/case', (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			updateIncome(newCase.paid)
-			res.sendStatus(200)
+			Income.findOne({}, (err, income) => {
+				if(err){
+					console.log(err)
+				} else {
+					income.income += newCase.paid
+					income.save()
+					res.send(newCase)
+				}
+			})
 		}
 	})
 })
