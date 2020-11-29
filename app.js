@@ -86,11 +86,11 @@ app.get('/expenses', (req, res) => {
 
 //Total Expenses Route
 app.get('/totalExpenses', (req, res) => {
-	totalExpense.find({}, (err, found) => {
+	totalExpense.findOne({}, (err, found) => {
 		if(err){
 			console.log(err)
 		} else {
-			res.send(JSON.stringify({total: found.total}))
+			console.log(found)
 		}
 	})
 })
