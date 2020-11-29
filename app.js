@@ -113,7 +113,7 @@ app.post('/new/case', (req, res) => {
 				} else {
 					income.income += newCase.paid
 					income.save()
-					res.send(newCase)
+					res.send(income)
 				}
 			})
 		}
@@ -141,10 +141,6 @@ app.post('/new/expense', (req, res) => {
 		}
 	}
 	)
-})
-
-totalExpense.create({
-	total: 0
 })
 
 //Move To History Case Route
