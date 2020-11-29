@@ -123,14 +123,21 @@ app.post('/new/expense', (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			totalExpense.findOneAndUpdate({_id: ''}, {total: expenses.total}, (err, total) => {
+			totalExpense.findOne({}, (err, total) => {
 				if(err){
 					console.log(err)
+				} else {
+					total.total += expenses.price
+					total.save()
 				}
 			})
 		}
 	}
 	)
+})
+
+totalExpense.create({
+	total: 0
 })
 
 //Move To History Case Route
