@@ -202,19 +202,21 @@ app.delete('/case/delete/:id', (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			Case.findOneAndDelete({_id: found._id}, (err, done) => {
+			CaseHistory.create({
+				name: found.name,
+				paid: found.paid,
+				description: found.description,
+				date: found.date,
+				assigned: found.assigned,
+			}, (err, history) => {
 				if(err){
 					console.log(err)
 				} else {
-					CaseHistory.create({
-						name: done.name,
-						paid: done.paid,
-						assigned: done.assigned,
-						date: done.date,
-						description: done.description
-					}, (err, history) => {
+					Case.findOneAndDelete({_id: found.id}, (err, deleted) => {
 						if(err){
 							console.log(err)
+						} else {
+							res.send(history)
 						}
 					})
 				}
