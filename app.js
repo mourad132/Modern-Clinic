@@ -50,7 +50,7 @@ app.get('/clearIncome', (req, res) => {
 	})
 })
 
-app.get('clearExpense', (req, res) => {
+app.get('/clearExpense', (req, res) => {
 	totalExpense.findOne({}, (err, total) => {
 		if(err){
 			console.log(err)
