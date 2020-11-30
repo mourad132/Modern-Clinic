@@ -249,29 +249,6 @@ app.put('/case/update', (req, res) => {
 	})
 })
 
-//Update Profit
-function updateProfit(){
-	Income.find({}, (err, incomes) => {
-		if(err){
-			console.log(err)
-		} else {
-			var income = incomes.income;
-			var expense = totalExpense(); 
-			var profit = income - expense
-			incomes.profit = profit;
-			Income.save
-		}
-	})
-}
-
-//Update Income
-function UpdateIncome(paid) {
-	Income.find({}, (err, income) => {
-		income.income += paid;
-		income.save()
-	})
-}
-
 //Update Expense Route
 app.put('/expense/update', (req, res) => {
 	var id = req.body.id
@@ -294,9 +271,6 @@ app.delete('/expense/delete', (req, res) => {
 	Expense.findOneAndDelete(req.body.id, (err, expense) => {
 		if(err){
 			console.log(err)
-		} else {
-			res.send(expense)
-			res.sendStatus(200)
 		}
 	})
 })
