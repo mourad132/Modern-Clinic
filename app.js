@@ -28,6 +28,16 @@ app.use(function(req, res, next) {
 //@desc Retrieve All The Cases
 //@method GET
 
+app.get('/history', (req, res) => {
+	CaseHistory.find({}, (err, found) => {
+		if(err){
+			console.log(err)
+		} else {
+			res.send(found)
+		}
+	})
+})
+
 app.get('/cases', (req, res) => {
 	Case.find({}, (err, newCases) => {
 		if(err){
