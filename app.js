@@ -160,14 +160,12 @@ app.post('/new/expense', (req, res) => {
 })
 
 //Move To History Case Route
-app.delete('/case/delete', (req, res) => {
-	Case.findById(req.body.id, (err, found) => {
+app.delete('/case/delete/:id', (req, res) => {
+	Case.findById(req.params.id, (err, found) => {
 		if(err){
 			console.log(err)
 		} else {
-			found.done = true;
-			found.save()
-			Case.findOneAndDelete({done: true}, (err, done) => {
+			Case.findOneAndDelete({_id: found._id}, (err, done) => {
 				if(err){
 					console.log(err)
 				} else {
@@ -180,8 +178,6 @@ app.delete('/case/delete', (req, res) => {
 					}, (err, history) => {
 						if(err){
 							console.log(err)
-						} else {
-							res.send(history)
 						}
 					})
 				}
