@@ -45,6 +45,7 @@ app.get('/clearIncome', (req, res) => {
 			console.log(err)
 		} else {
 			income.income = 0
+			income.save()
 		}
 	})
 })
@@ -55,6 +56,7 @@ app.get('clearExpense', (req, res) => {
 			console.log(err)
 		} else {
 			total.total = 0
+			total.save()
 		}
 	})
 })
