@@ -32,14 +32,6 @@ app.delete('/delete', (req, res) => {
 	CaseHistory.findOneAndDelete({_id: req.body.id}, (err, deleted) => {
 		if(err){
 			console.log(err)
-		} else {
-			Income.findOne({}, (err, income) => {
-				if(err){
-					console.log(err)
-				} else {
-					income.income -= deleted.paid
-				}
-			})
 		}
 	})
 })
