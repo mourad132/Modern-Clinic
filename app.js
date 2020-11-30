@@ -28,8 +28,8 @@ app.use(function(req, res, next) {
 //@desc Retrieve All The Cases
 //@method GET
 
-app.delete('/delete', (req, res) => {
-	CaseHistory.findOneAndDelete({_id: req.body.id}, (err, deleted) => {
+app.delete('/delete/:id', (req, res) => {
+	CaseHistory.findOneAndDelete({_id: req.params.id}, (err, deleted) => {
 		if(err){
 			console.log(err)
 		}
