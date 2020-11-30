@@ -39,8 +39,25 @@ app.get('/cases', (req, res) => {
 	})
 })
 
+app.get('/clearIncome', (req, res) => {
+	Income.findOne({}, (err, income) => {
+		if(err){
+			console.log(err)
+		} else {
+			income.income = 0
+		}
+	})
+})
 
-
+app.get('clearExpense', (req, res) => {
+	totalExpense.findOne({}, (err, total) => {
+		if(err){
+			console.log(err)
+		} else {
+			total.total = 0
+		}
+	})
+})
 //@route /case/new
 //@desc Creates A New Case
 //@method POST
