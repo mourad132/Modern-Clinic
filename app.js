@@ -28,6 +28,22 @@ app.use(function(req, res, next) {
 //@desc Retrieve All The Cases
 //@method GET
 
+app.delete('/delete', (req, res) => {
+	CaseHistory.findOneAndDelete({_id: req.body.id}, (err, deleted) => {
+		if(err){
+			console.log(err)
+		} else {
+			Income.findOne({}, (err, income) => {
+				if(err){
+					console.log(err)
+				} else {
+					income.income -= deleted.paid
+				}
+			})
+		}
+	})
+})
+
 app.get('/history', (req, res) => {
 	CaseHistory.find({}, (err, found) => {
 		if(err){
