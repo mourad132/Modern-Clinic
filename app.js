@@ -160,32 +160,30 @@ app.post('/new/expense', (req, res) => {
 
 //Move To History Case Route
 app.delete('/case/delete', (req, res) => {
-	Case.find({done: true}, (err, found) => {
+	Case.findById(req.body.id, (err, found) => {
 		if(err){
 			console.log(err)
 		} else {
-			found.forEach(done => {
-				CaseHistory.create({
-					name: done.name,
-					paid: done.paid,
-					description: done.description,
-					date: done.date,
-					assigned: done.assigned
-				}, (err, created) => {
-					if(err){
-						console.log(err)
-					} else {
-						found.forEach(one => {
-							Case.findOneAndDelete({_id: one._id}, (err, deleted) => {
-								if(err){
-									console.log(err)
-								} else {
-									res.send(created)
-								}
-							})
-						})
-					}
-				})
+			found.done = true;
+			found.save()
+			Case.findOneAndDelete({done: true}, (err, done) => {
+				if(err){
+					console.log(err)
+				} else {
+					CaseHistory.create({
+						name: done.name,
+						paid: done.paid,
+						assigned: done.assigned,
+						date: done.date,
+						description: done.description
+					}, (err, history) => {
+						if(err){
+							console.log(err)
+						} else {
+							res.send(history)
+						}
+					})
+				}
 			})
 		}
 	})
