@@ -117,7 +117,8 @@ app.post('/new/case', (req, res) => {
 		paid: req.body.paid,
 		assigned: req.body.assigned,
 		date: req.body.date,
-		description: req.body.description 
+		description: req.body.description,
+		done: false,
 	}, (err, newCase) => {
 		if(err){
 			console.log(err)
