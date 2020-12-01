@@ -261,7 +261,7 @@ app.put('/expense/update', (req, res) => {
 });
 
 //Delete Expense
-app.get('/expense/delete', (req, res) => {
+app.get('/expense/delete/:id', (req, res) => {
 	Expense.findOneAndDelete(req.params.id, (err, expense) => {
 		if(err){
 			console.log(err)
