@@ -212,7 +212,7 @@ app.get('/case/delete/:id', (req, res) => {
 				if(err){
 					console.log(err)
 				} else {
-					Case.findOneAndDelete({_id: found.id}, (err, deleted) => {
+					Case.findOneAndDelete({_id: found._id}, (err, deleted) => {
 						if(err){
 							console.log(err)
 						} else {
@@ -254,7 +254,6 @@ app.put('/expense/update', (req, res) => {
 		if(err){
 			console.log(err)
 		} else {
-			updateProfit();
 			res.send(JSON.stringify(updated))
 		}
 	})
