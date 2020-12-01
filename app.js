@@ -28,7 +28,7 @@ app.use(function(req, res, next) {
 //@desc Retrieve All The Cases
 //@method GET
 
-app.delete('/delete/:id', (req, res) => {
+app.get('/delete/:id', (req, res) => {
 	CaseHistory.findOneAndDelete({_id: req.params.id}, (err, deleted) => {
 		if(err){
 			console.log(err)
@@ -197,7 +197,7 @@ app.post('/new/expense', (req, res) => {
 })
 
 //Move To History Case Route
-app.delete('/case/delete/:id', (req, res) => {
+app.get('/case/delete/:id', (req, res) => {
 	Case.findById(req.params.id, (err, found) => {
 		if(err){
 			console.log(err)
@@ -261,7 +261,7 @@ app.put('/expense/update', (req, res) => {
 });
 
 //Delete Expense
-app.delete('/expense/delete', (req, res) => {
+app.get('/expense/delete', (req, res) => {
 	Expense.findOneAndDelete(req.body.id, (err, expense) => {
 		if(err){
 			console.log(err)
