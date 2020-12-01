@@ -266,6 +266,16 @@ app.get('/expense/delete/:id', (req, res) => {
 		if(err){
 			console.log(err)
 		}
+		else {
+			totalExpense.findOne({}, (err, total) => {
+				if(err){
+					console.log(err)
+				} else {
+					expense.price -= total.total
+					total.save()
+				}
+			})
+		}
 	})
 })
 
