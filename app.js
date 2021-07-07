@@ -55,7 +55,7 @@ app.get('/delete/profit/:id', (req, res) => {
 				if(err){
 					res.send(err)
 				} else {
-					found.paid -= profit.profit;
+					profit.profit -= found.paid;
 					Income.save()
 				}
 			})
