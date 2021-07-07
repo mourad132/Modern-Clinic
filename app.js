@@ -282,6 +282,20 @@ app.put('/expense/update', (req, res) => {
 
 //Delete Expense
 app.get('/expense/delete/:id', (req, res) => {
+	Expense.find({_id: req.params.id}, (err, found) => {
+		if(err){
+			res.send(err)
+		} else {
+			totalExpense.find({}, (err, total) => {
+				if(err){
+					console.log(err)
+				} else {
+					total.total -= found.price
+					total.save()
+				}
+			})
+		}
+	})
 	Expense.findOneAndDelete(req.params.id, (err, expense) => {
 		if(err){
 			console.log(err)
