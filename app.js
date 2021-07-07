@@ -46,6 +46,27 @@ app.get('/history', (req, res) => {
 	})
 })
 
+app.post("/history/new/:id", (req, res) => {
+	Case.find({_id: req.params.id}, (err, found) => {
+		if(err){
+			res.send(err)
+		} else {
+		CaseHistory.create({
+			name: found.name,
+			paid: found.paid,
+			assigned: found.assigned,
+			description: found.description,
+			date: found.date,
+			number: found.number,
+	}, (err, created) => {
+		if(err){
+			res.send(err)
+		} 
+	})
+		}
+	})
+})
+
 app.get('/cases', (req, res) => {
 	Case.find({}, (err, newCases) => {
 		if(err){
