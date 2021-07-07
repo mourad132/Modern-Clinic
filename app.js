@@ -286,7 +286,7 @@ app.get('/expense/delete/:id', (req, res) => {
 		if(err){
 			res.send(err)
 		} else {
-			totalExpense.find({}, (err, total) => {
+			totalExpense.findOne({}, (err, total) => {
 				if(err){
 					console.log(err)
 				} else {
