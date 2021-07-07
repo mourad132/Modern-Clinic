@@ -46,6 +46,23 @@ app.get('/history', (req, res) => {
 	})
 })
 
+app.get('/delete/profit/:id', (req, res) => {
+	CaseHistory.find({_id: req.params.id}, (err, found) => {
+		if(err){
+			res.send(err)
+		} else {
+			Income.find({_id: "5f93fb0bfdf03e036f5b1fd1"}, (err, profit) => {
+				if(err){
+					res.send(err)
+				} else {
+					found.paid -= profit.profit;
+					Income.save()
+				}
+			})
+		}
+	})
+})
+
 app.post("/history/new/:id", (req, res) => {
 	Case.find({_id: req.params.id}, (err, found) => {
 		if(err){
